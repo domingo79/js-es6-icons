@@ -31,7 +31,7 @@ icone.forEach((icona) => {
         icona.color = 'orange';
         vegetableIcone.push(icona)
     } else if (icona.type === 'user') {
-        icona.color = 'red';
+        icona.color = 'purple';
         userIcone.push(icona)
     }
     // document.getElementById('markUp').insertAdjacentHTML('beforeend', `
@@ -44,7 +44,6 @@ icone.forEach((icona) => {
 });
 
 // Milestone 3 Creiamo una select con i tipi di icone e usiamola per filtrare le icone
-
 const selezione = document.getElementById('filter');
 selezione.addEventListener('change', () => {
 
@@ -55,28 +54,28 @@ selezione.addEventListener('change', () => {
 
     if (valore === 'all') {
         markUp = icone;
-        console.log(markUp);
+        //console.log(markUp);
     } else if (valore === 'animal') {
         markUp = animalIcone;
-        console.log(markUp);
+        //console.log(markUp);
     } else if (valore === 'vegetable') {
         markUp = vegetableIcone;
-        console.log(markUp);
+        //console.log(markUp);
     } else if (valore === 'user') {
         markUp = userIcone;
-        console.log(markUp);
+        //console.log(markUp);
     }
 
     markUp.forEach((elem) => {
 
         const { name, family, prefix, color } = elem;
-
         document.getElementById('markUp').insertAdjacentHTML('beforeend', `
         <div>
         <i class="${family} ${prefix}${name}" style="color:${color}" ></i> 
-        <h2>${name} </h2>
+        <h5>${name} </h5>
         </div>
         `)
+
     })
 
 })
