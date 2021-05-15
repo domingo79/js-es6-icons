@@ -1,6 +1,5 @@
 // Milestone 1:
 // Partendo dalla seguente struttura dati , mostriamo in pagina tutte le icone disponibili come da layout.
-
 const icone = [
     { name: 'cat', prefix: 'fa-', type: 'animal', family: 'fas' },
     { name: 'crow', prefix: 'fa-', type: 'animal', family: 'fas' },
@@ -21,64 +20,53 @@ const icone = [
 ];
 
 // Milestone 2 Coloriamo le icone per tipo
-const animalIcone = [], vegetableIcone = [], userIcone = [];
-
-icone.forEach((icona) => {
-    if (icona.type === 'animal') {
-        icona.color = 'blue';
-        animalIcone.push(icona)
-    } else if (icona.type === 'vegetable') {
-        icona.color = 'orange';
-        vegetableIcone.push(icona)
-    } else if (icona.type === 'user') {
-        icona.color = 'purple';
-        userIcone.push(icona)
+const iconeColor = icone.map((ele) => {
+    if (ele.type == 'animal') {
+        ele.color = 'blue';
+    } else if (ele.type == 'vegetable') {
+        ele.color = 'orange'
+    } else {
+        ele.color = 'purple'
     }
-    // document.getElementById('markUp').insertAdjacentHTML('beforeend', `
-    //     <div>
-    //     <i class="${icona.family} ${icona.prefix}${icona.name}" style="color:${icona.color}" ></i> 
-    //     <h2>${icona.name} </h2>
-    //     </div>
-    //     `)
+    return ele
+})
 
+iconeColor.forEach((iconeElem) => {
+    document.getElementById('markUp').insertAdjacentHTML('beforeend',
+        `
+    <div class="card">
+    <i class="${iconeElem.family} ${iconeElem.prefix}${iconeElem.name}" style="color:${iconeElem.color}"></i>
+    <h4>${iconeElem.name}</h4>
+    </div>
+    `)
 });
 
 // Milestone 3 Creiamo una select con i tipi di icone e usiamola per filtrare le icone
 const selezione = document.getElementById('filter');
 selezione.addEventListener('change', () => {
+    const svuotaContenitore = document.getElementById('markUp').innerHTML = "";
 
-    const valore = selezione.value;
-    //console.log(valore);
+    let catturaValore = selezione.value;
 
-    let markUp = []
+    iconeColor.filter((iconeElem) => {
 
-    if (valore === 'all') {
-        markUp = icone;
-        //console.log(markUp);
-    } else if (valore === 'animal') {
-        markUp = animalIcone;
-        //console.log(markUp);
-    } else if (valore === 'vegetable') {
-        markUp = vegetableIcone;
-        //console.log(markUp);
-    } else if (valore === 'user') {
-        markUp = userIcone;
-        //console.log(markUp);
-    }
+        if (iconeElem.type === catturaValore) {
+            document.getElementById('markUp').insertAdjacentHTML('beforeend',
+                `
+            <div  class="card">
+            <i class="${iconeElem.family} ${iconeElem.prefix}${iconeElem.name}" style="color:${iconeElem.color}"></i>
+            <h4>${iconeElem.name}</h4>
+            </div>
+            `)
+        } else if (catturaValore === 'all') {
+            document.getElementById('markUp').insertAdjacentHTML('beforeend',
+                `
+            <div  class="card">
+            <i class="${iconeElem.family} ${iconeElem.prefix}${iconeElem.name}" style="color:${iconeElem.color}"></i>
+            <h4>${iconeElem.name}</h4>
+            </div>
+            `)
+        }
+    });
 
-    markUp.forEach((elem) => {
-
-        const { name, family, prefix, color } = elem;
-        document.getElementById('markUp').insertAdjacentHTML('beforeend', `
-        <div>
-        <i class="${family} ${prefix}${name}" style="color:${color}" ></i> 
-        <h5>${name} </h5>
-        </div>
-        `)
-
-    })
-
-})
-
-
-
+});

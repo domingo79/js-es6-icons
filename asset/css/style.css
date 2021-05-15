@@ -34,8 +34,9 @@ section
     flex-wrap: wrap;
     justify-content: center;
     align-items: flex-start;
+
 }
-section > div
+section .card
 {
     width: 250px;
     height: 100px;
@@ -47,18 +48,16 @@ section > div
     align-items: flex-start;
     border-radius: 25px;
     font-size: 2rem;
+}
+.card > i 
+{
+    width: 100%;
     text-align: center;
+    padding: 0.5rem;
 }
-section > div > i 
+.card > h4
 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-}
-section > div > h5
-{
-    display: inline-block;
+    width: 100%;
     text-align: center;
 }
 
